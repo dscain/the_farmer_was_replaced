@@ -32,6 +32,31 @@ def coverBoardSetup(x):
 	coverPlant(Entities.Carrot,5)	
 	coverPlant("WoodGrass",4)
 
+	
+
+
+def coverBoardComplete(x, drones=None):
+	unlock(Unlocks.Grass)
+	unlock(Unlocks.Trees)
+	unlock(Unlocks.Auto_Unlock)
+	coverPlant(Entities.Sunflower)
+	move(East)
+	coverPlant(Entities.Sunflower)
+	move(East)
+	if drones == None:
+		drones = max_drones()
+	if drones > max_drones():
+		drones = max_drones()
+	for _ in range(get_world_size()-2):
+		if num_drones() < drones:
+			def task():
+				coverPlant(x)
+			spawn_drone(task)
+		else:
+			coverPlant(x)
+		move(East)
+	#unlock(Unlocks.Grass)
+	
+	
 needsTill = [Entities.Sunflower, Entities.Carrot, Entities.Pumpkin, Entities.Cactus]
 			
-    
